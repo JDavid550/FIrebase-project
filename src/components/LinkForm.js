@@ -3,14 +3,18 @@ import React, {useState} from 'react'
 
 const LinkForm = (props)=>{
 
-    const [values, setValues]=useState({
+    const initialStateValues = {
         url:'',
         name: '',
         description:''
-    })
+    }
+
+    const [values, setValues]=useState({initialStateValues})
+
     const handleSubmit = e =>{
         e.preventDefault();
         props.AddorEditLink(values)
+        setValues({...initialStateValues})
     }
 
     const handleInputChange = e =>{
@@ -31,17 +35,31 @@ const LinkForm = (props)=>{
                 className="form-control" 
                 placeholder="https://url.com" 
                 name="url"
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}
+                value={values.url}/>
             </div>
             <div className="form-group input-group">
                 <div className="input-group-text bg-light">
                     <i className="material-icons">create</i>
                 </div>
-                <input type="text" className="form-control" placeholder="Website name" name="name" onChange={handleInputChange}/>
+                <input type="text" 
+                className="form-control" 
+                placeholder="Website name" 
+                name="name" 
+                onChange={handleInputChange}
+                value={values.name}/>
             </div>
 
             <div className="form-group">
-                <textarea name="description" id="" cols="30" rows="3" className="form-control" placeholder="description" onChange={handleInputChange}>
+                <textarea 
+                name="description" 
+                id="" cols="30" 
+                rows="3" 
+                className="form-control" 
+                placeholder="description" 
+                onChange={handleInputChange}
+                value={values.description}
+                >
 
                 </textarea>
             </div>
